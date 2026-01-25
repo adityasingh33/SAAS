@@ -1,5 +1,4 @@
-// 1hr 32 min  -- Mita dena mujhe 
-import React from 'react'
+ import React from 'react';
 import { appPlans } from '../assets/assets';
 
 interface Plan {
@@ -7,7 +6,7 @@ interface Plan {
   name: string;
   price: string;
   credits: number;
-  description: string[];
+  description: string;
   features: string[];
 }
 const Pricing = () => {
