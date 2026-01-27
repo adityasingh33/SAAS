@@ -1,4 +1,4 @@
- 
+ //2hrs 1min
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import type { Project } from '../types';
