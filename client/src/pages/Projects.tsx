@@ -1,4 +1,4 @@
- //2hrs 1min
+//2hrs 1min
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import type { Project } from '../types';
@@ -28,6 +28,20 @@ const Projects = () => {
       }
     }, 2000)
   }
+
+  const saveProject = async() => {
+
+  };
+
+  const downloadCode = () => {
+
+  }
+
+  const togglePublish = () => {
+
+  }
+
+
 
   useEffect(() => {
     fetchProject()
@@ -74,26 +88,32 @@ const Projects = () => {
         </div>
         {/* right */}
         <div className='flex items-center justify-end gap-3 flex-1 text-xs sm:text-sm'>
-          <button disabled={isSaving} className='max-sm:hidden bg-gray-800 hover:bg-gray-700 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-gray-700' >
-            {isSaving ? <Loader2Icon className='animate-spin' size={16}/> : 
-             <SaveIcon size={16}/>} Save
+          <button  onClick={saveProject} disabled={isSaving} className='max-sm:hidden bg-gray-800 hover:bg-gray-700 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-gray-700' >
+            {isSaving ? <Loader2Icon className='animate-spin' size={16} /> :
+              <SaveIcon size={16} />} Save
           </button>
 
-          <Link target='_blank' to={`/preview/${projectId}`}>
-             <FullscreenIcon size={16}/> Preview 
+          <Link target='_blank' to={`/preview/${projectId}`} className='flex-items-center gap-2 px-4 py-1 rounded sm:rounded-sm border border-gray-700 hover:border-gray-500 transistion-colors'>
+            <FullscreenIcon size={16} /> Preview
           </Link>
 
-          <button>
-            <ArrowBigDownDashIcon size={16}/>Download
+          <button onClick={downloadCode} className='bg-linear-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white px-3.5 py-1 flex items-center gap-2 rounded m:rounded-sm transition-colors'>
+            <ArrowBigDownDashIcon size={16} />Download
           </button>
 
-          <button>
-            {project.isPublished? 
-              <EyeClosed size={16}/> : <EyeIcon size={16}/>  
-          }
-           {project.isPublished ? "Unpublish": "Publish"}
+          <button onClick={togglePublish}>
+            {project.isPublished ?
+              <EyeClosed size={16} /> : <EyeIcon size={16} />
+            }
+            {project.isPublished ? "Unpublish" : "Publish"}
           </button>
         </div>
+      </div>
+      <div className='flex-1 flex overflow-auto'>
+          <div>Sidebar</div>
+          <div className='flex-1 p-2 pl-0'>
+            Project Preview
+          </div>
       </div>
     </div>
   ) : (

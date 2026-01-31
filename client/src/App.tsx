@@ -1,5 +1,4 @@
-import React from 'react'
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useLocation} from 'react-router-dom';
 import Home from './pages/Home.tsx'
 import Pricing from './pages/Pricing.tsx'
 import Projects from './pages/Projects.tsx'
@@ -11,6 +10,10 @@ import Navbar from "./components/Navbar.tsx";
 
 
 const App = () => {
+    const {pathname} = useLocation()
+
+    const hideNavbar = pathname.startsWith('/projects/') && pathname !== '/projects' || pathname.startsWith('/view/') || pathname.startsWith('/preview/')
+
     return (
         <div>
 
