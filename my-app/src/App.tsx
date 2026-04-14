@@ -1,6 +1,6 @@
 import React from 'react'
 
-const View = () => {
+const App = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const View = () => {
   )
 }
 
-export default View
+export default App
