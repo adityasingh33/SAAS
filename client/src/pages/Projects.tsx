@@ -1,9 +1,11 @@
-//2hrs 1min
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import type { Project } from '../types';
-import { ArrowBigDownDashIcon, EyeClosed, EyeIcon, EyeOffIcon, FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, SaveIcon, SmartphoneIcon, TabletIcon, XIcon } from 'lucide-react';
-import { dummyConversations, dummyProjects } from '../assets/assets';
+import { ArrowBigDownDashIcon, EyeClosed, EyeIcon,  FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, SaveIcon, SmartphoneIcon, TabletIcon, XIcon } from 'lucide-react';
+import Sidebar from '../components/Sidebar';
+import { dummyConversations, dummyProjects, dummyVersion } from '../assets/assets';
+import ProjectPreview, { type ProjectPreviewRef } from '../components/ProjectPreview';
 
 const Projects = () => {
   const { projectId } = useParams();
@@ -18,11 +20,13 @@ const Projects = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
+  const previewRef = useRef<ProjectPreviewRef>(null)
+
   const fetchProject = async () => {
     const project = dummyProjects.find(project => project.id === projectId)
     setTimeout(() => {
       if (project) {
-        setProject({ ...project, conversation: dummyConversations });
+        setProject({ ...project, conversation: dummyConversations,versions: dummyVersion });
         setLoading(false)
         setIsGenerating(project.current_code ? false : true)
       }
@@ -110,9 +114,15 @@ const Projects = () => {
         </div>
       </div>
       <div className='flex-1 flex overflow-auto'>
-          <div>Sidebar</div>
-          <div className='flex-1 p-2 pl-0'>
-            Project Preview
+          <Sidebar isMenuOpen={isMenuOpen} project={project} setProject={(p) => setProject(p)} isGenerating = {isGenerating} setIsGenerating={setIsGenerating}/>
+           
+          <div className='flex-1 p-2 pl-0  -ms-overflow-style: none scrollbar-width: none'>
+            {/* Project Preview */}
+            <ProjectPreview 
+            ref={previewRef}
+            device={device}
+            project={project}
+            isGenerating={isGenerating} />
           </div>
       </div>
     </div>
